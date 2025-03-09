@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Tasks
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123
+  flyway:
+    enabled: true
+
+security:
+  jwt:
+    secret: 016e88fee3d158ff11c7d52a035e5cbd7e9820ae862ad2e3f446e5161a5053cf030c25e7490a2070adce03f0fa355a4b93058941cd84193a4ee2132a751655369a0d81df7352c0fae59f1aa726c74dd12ec09ae8c4db57c803652c408dcb559de207c3864f4972c7234ad7a285e0184cc77c758bb75ca4154dd7c86e2919d541f6da6de1325e06964d5535c29146d5daca7173a6fe757b8668445371c3e78c269dd5615ee0dc282fc207c49713ef757548a39d71a2ce17d2f746c44d16eace52b5b835237ac7aada466525065bf5ebcb7cef5b1b53a50f5de1be5b39947235d9a9e96946dd29f47ca5d54024fd86f99902982fb632d2bd79c16477bf873e0f55
