@@ -27,6 +27,7 @@ public abstract class TaskMapper {
     @Mapping(ignore = true, target = "createdAt")
     @Mapping(ignore = true, target = "modifiedAt")
     @Mapping(ignore = true, target = "authorId")
+    @Mapping(ignore = true, target = "comments")
     public abstract void copy(TaskCreateEditDto dto, @MappingTarget Task entity);
 
     public TaskReadDto toDto(Task entity) {
@@ -43,7 +44,7 @@ public abstract class TaskMapper {
                 .stream()
                 .collect(Collectors.toMap(User::getId, v -> v));
 
-        User author = uuidUserMap.get(entity.getAuthorId());
+        User author = Objects.requireNonNullElseGet(uuidUserMap.get(entity.getAuthorId()), User::new);
         User performer = Objects.requireNonNullElseGet(uuidUserMap.get(entity.getPerformerId()), User::new);
 
         dto.setAuthor(UserReadDto.builder()
