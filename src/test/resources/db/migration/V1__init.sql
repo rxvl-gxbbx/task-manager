@@ -1,19 +1,5 @@
 create schema if not exists tasks;
 
-create table if not exists tasks.tasks
-(
-    id           uuid         not null
-        primary key,
-    title        varchar(255) not null,
-    description  text,
-    status_id    smallint,
-    priority_id  smallint,
-    author_id    uuid         not null,
-    performer_id uuid,
-    created_at   timestamp    not null,
-    modified_at  timestamp    not null
-);
-
 create table if not exists tasks.users
 (
     id          uuid         not null
@@ -26,6 +12,26 @@ create table if not exists tasks.users
     role        varchar(32),
     created_at  timestamp    not null,
     modified_at timestamp    not null
+);
+
+create table if not exists tasks.tasks
+(
+    id           uuid         not null
+        primary key,
+    title        varchar(255) not null,
+    description  text,
+    status_id    smallint,
+    priority_id  smallint,
+    author_id    uuid
+        constraint tasks_users_id_fk
+            references tasks.users
+            on delete set null,
+    performer_id uuid
+        constraint tasks_users_id_fk_2
+            references tasks.users
+            on delete set null,
+    created_at   timestamp    not null,
+    modified_at  timestamp    not null
 );
 
 create table if not exists tasks.comments
