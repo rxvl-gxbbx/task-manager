@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.rxvlvxr.tasks.database.entity.QTask.task;
-import static org.rxvlvxr.tasks.database.entity.QUser.user;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +31,6 @@ public class FilterTaskRepositoryImpl implements FilterTaskRepository {
         return new JPAQuery<Task>(entityManager)
                 .select(task)
                 .from(task)
-                .leftJoin(user)
-                .on(task.performerId.eq(user.id))
                 .where(predicate)
                 .orderBy(getOrderBy(filter.getSortBy(), filter.getSortMode()))
                 .offset((long) filter.getPage() * filter.getLimit())
